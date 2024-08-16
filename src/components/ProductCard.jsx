@@ -1,7 +1,6 @@
 import React from "react";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   return (
     <div>
       <div className="card bg-base-100 shadow-xl h-96">

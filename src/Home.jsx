@@ -1,7 +1,5 @@
 import axios from "axios";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import {
   TbPlayerTrackPrevFilled,
@@ -49,10 +47,8 @@ const Home = () => {
           sortOrder,
         },
       });
-      setProducts(response.data);
-      // Assuming the server provides a total count for pagination
-      const totalCount = parseInt(response.headers["x-total-count"]);
-      setTotalPages(Math.ceil(totalCount / limit));
+      setProducts(response.data.products);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -91,13 +87,6 @@ const Home = () => {
   const handlePageChange = (newPage) => {
     setPage(newPage);
   };
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:5000/products").then((res) => {
-  //     setProducts(res.data);
-  //     console.log(res.data);
-  //   });
-  // }, []);
 
   return (
     <div className="my-10 max-w-[95%] mx-auto">
@@ -178,21 +167,20 @@ const Home = () => {
                 className="input input-bordered w-full max-w-xs"
                 type="number"
                 placeholder="Min Price"
-                // value={minPrice}
-                // onChange={(e) => handlePriceRangeChange(e, "min")}
+                value={minPrice}
+                onChange={(e) => handlePriceRangeChange(e, "min")}
               />
               <input
                 className="input input-bordered w-full max-w-xs"
                 type="number"
                 placeholder="Max Price"
-                // value={maxPrice}
-                // onChange={(e) => handlePriceRangeChange(e, "max")}
+                value={maxPrice}
+                onChange={(e) => handlePriceRangeChange(e, "max")}
               />
             </div>
           </div>
 
           {/* sorting */}
-
           <div className="sort-options flex gap-10">
             <button
               className="btn btn-outline btn-primary"
@@ -222,40 +210,40 @@ const Home = () => {
           <ProductCard key={idx} product={product}></ProductCard>
         ))}
       </div>
-      {/* pagination */}
 
+      {/* pagination */}
       <div className="flex items-center justify-center mt-10">
         <div className="join">
-          <button className="join-item btn btn-square">
+          <button
+            className="join-item btn btn-square"
+            onClick={() => handlePageChange(page > 1 ? page - 1 : 1)}
+            disabled={page === 1}
+          >
             <TbPlayerTrackPrevFilled />
           </button>
 
-          <input
+          {Array.from({ length: totalPages }, (_, i) => (
+            <input
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={`join-item btn btn-square ${
+                page === i + 1 ? "btn-active" : ""
+              }`}
+              type="radio"
+              name="options"
+              aria-label={i + 1}
+              checked={page === i + 1}
+              readOnly
+            />
+          ))}
+
+          <button
             className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="1"
-            defaultChecked
-          />
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="2"
-          />
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="3"
-          />
-          <input
-            className="join-item btn btn-square"
-            type="radio"
-            name="options"
-            aria-label="4"
-          />
-          <button className="join-item btn btn-square">
+            onClick={() =>
+              handlePageChange(page < totalPages ? page + 1 : totalPages)
+            }
+            disabled={page === totalPages}
+          >
             <TbPlayerTrackNextFilled />
           </button>
         </div>
