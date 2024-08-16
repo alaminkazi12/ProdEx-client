@@ -38,6 +38,65 @@ const Home = () => {
           </svg>
         </label>
       </div>
+
+      {/* categorization */}
+      <div>
+        {/* select by brand */}
+        <div>
+          <select className="select select-bordered w-full max-w-xs">
+            <option disabled selected>
+              Select By Brand
+            </option>
+            <option>NatureBond</option>
+            <option>ProBlend</option>
+            <option>UrbanStyle</option>
+            <option>YogaMaster</option>
+            <option>EcoLux</option>
+            <option>UrbanRunner</option>
+            <option>YogaMaster</option>
+            <option>GreenSpace</option>
+            <option>TravelMate</option>
+          </select>
+        </div>
+
+        {/* select by category */}
+        <div>
+          <select className="select select-bordered w-full max-w-xs">
+            <option disabled selected>
+              Select By Category
+            </option>
+            <option>Fitness</option>
+            <option>Kitchen Appliances</option>
+            <option>Home Decor</option>
+            <option>Electronics</option>
+            <option>Skincare</option>
+            <option>Accessories</option>
+            <option>Clothing</option>
+            <option>Footwear</option>
+          </select>
+        </div>
+
+        {/* select by price range */}
+        <div>
+          <div className="price-range">
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="number"
+              placeholder="Min Price"
+              // value={minPrice}
+              // onChange={(e) => handlePriceRangeChange(e, "min")}
+            />
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="number"
+              placeholder="Max Price"
+              // value={maxPrice}
+              // onChange={(e) => handlePriceRangeChange(e, "max")}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* show products */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {products.map((product, idx) => (
