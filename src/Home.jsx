@@ -152,18 +152,22 @@ const Home = () => {
 
           {/* select by category */}
           <div>
-            <select className="select select-bordered w-full max-w-xs">
-              <option disabled selected>
+            <select
+              value={category}
+              onChange={handleCategoryChange}
+              className="select select-bordered w-full max-w-xs"
+            >
+              <option value="" disabled selected>
                 Select By Category
               </option>
-              <option>Fitness</option>
-              <option>Kitchen Appliances</option>
-              <option>Home Decor</option>
-              <option>Electronics</option>
-              <option>Skincare</option>
-              <option>Accessories</option>
-              <option>Clothing</option>
-              <option>Footwear</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Kitchen Appliances">Kitchen Appliances</option>
+              <option value="Home Decor">Home Decor</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Skincare">Skincare</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Footwear">Footwear</option>
             </select>
           </div>
 
