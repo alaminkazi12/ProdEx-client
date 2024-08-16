@@ -90,16 +90,16 @@ const Home = () => {
 
   return (
     <div className="my-10 max-w-[95%] mx-auto">
-      <div className="border-2 rounded-xl p-12 mb-6">
+      <div className="border-2 rounded-xl p-6 md:p-12 mb-6">
         {/* search box */}
-        <div className="max-w-[25%] mx-auto mb-6">
+        <div className="md:max-w-[50%] lg:max-w-[25%] mx-auto mb-6">
           <label className="input input-bordered flex items-center gap-2">
             <input
               type="text"
               value={searchQuery}
               onChange={handleSearch}
               className="grow"
-              placeholder="Search...."
+              placeholder="Search..."
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,15 +117,15 @@ const Home = () => {
         </div>
 
         {/* categorization */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           {/* select by brand */}
-          <div>
+          <div className="flex-grow">
             <select
               value={brand}
               onChange={handleBrandChange}
-              className="select select-bordered w-full max-w-xs"
+              className="select select-bordered w-full"
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select By Brand
               </option>
               <option value="NatureBond">NatureBond</option>
@@ -140,13 +140,13 @@ const Home = () => {
           </div>
 
           {/* select by category */}
-          <div>
+          <div className="flex-grow">
             <select
               value={category}
               onChange={handleCategoryChange}
-              className="select select-bordered w-full max-w-xs"
+              className="select select-bordered w-full"
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select By Category
               </option>
               <option value="Fitness">Fitness</option>
@@ -161,27 +161,25 @@ const Home = () => {
           </div>
 
           {/* select by price range */}
-          <div className="">
-            <div className="price-range flex items-center gap-10">
-              <input
-                className="input input-bordered w-full max-w-xs"
-                type="number"
-                placeholder="Min Price"
-                value={minPrice}
-                onChange={(e) => handlePriceRangeChange(e, "min")}
-              />
-              <input
-                className="input input-bordered w-full max-w-xs"
-                type="number"
-                placeholder="Max Price"
-                value={maxPrice}
-                onChange={(e) => handlePriceRangeChange(e, "max")}
-              />
-            </div>
+          <div className="flex flex-col md:flex-row items-center md:gap-2">
+            <input
+              className="input input-bordered w-full max-w-xs mb-2 md:mb-0"
+              type="number"
+              placeholder="Min Price"
+              value={minPrice}
+              onChange={(e) => handlePriceRangeChange(e, "min")}
+            />
+            <input
+              className="input input-bordered w-full max-w-xs"
+              type="number"
+              placeholder="Max Price"
+              value={maxPrice}
+              onChange={(e) => handlePriceRangeChange(e, "max")}
+            />
           </div>
 
           {/* sorting */}
-          <div className="sort-options flex gap-10">
+          <div className="sort-options flex flex-col md:flex-row md:gap-2">
             <button
               className="btn btn-outline btn-primary"
               onClick={() => handleSortChange("price", "asc")}
