@@ -10,13 +10,94 @@ import {
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(8);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sortField, setSortField] = useState("product_creation_date");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/products").then((res) => {
-      setProducts(res.data);
-      console.log(res.data);
-    });
-  }, []);
+    fetchProducts();
+  }, [
+    page,
+    searchQuery,
+    category,
+    brand,
+    minPrice,
+    maxPrice,
+    sortField,
+    sortOrder,
+  ]);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/products", {
+        params: {
+          page,
+          limit,
+          search: searchQuery,
+          category,
+          brand,
+          minPrice,
+          maxPrice,
+          sortField,
+          sortOrder,
+        },
+      });
+      setProducts(response.data);
+      // Assuming the server provides a total count for pagination
+      const totalCount = parseInt(response.headers["x-total-count"]);
+      setTotalPages(Math.ceil(totalCount / limit));
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    setPage(1); // Reset to the first page on new search
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    setPage(1); // Reset to the first page on category change
+  };
+
+  const handleBrandChange = (e) => {
+    setBrand(e.target.value);
+    setPage(1); // Reset to the first page on brand change
+  };
+
+  const handlePriceRangeChange = (e, type) => {
+    if (type === "min") {
+      setMinPrice(e.target.value);
+    } else {
+      setMaxPrice(e.target.value);
+    }
+    setPage(1); // Reset to the first page on price range change
+  };
+
+  const handleSortChange = (field, order) => {
+    setSortField(field);
+    setSortOrder(order);
+    setPage(1); // Reset to the first page on sort change
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:5000/products").then((res) => {
+  //     setProducts(res.data);
+  //     console.log(res.data);
+  //   });
+  // }, []);
 
   return (
     <div className="my-10 max-w-[95%] mx-auto">
@@ -24,7 +105,13 @@ const Home = () => {
         {/* search box */}
         <div className="max-w-[25%] mx-auto mb-6">
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Search" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearch}
+              className="grow"
+              placeholder="Search...."
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -44,19 +131,22 @@ const Home = () => {
         <div className="flex items-center justify-between">
           {/* select by brand */}
           <div>
-            <select className="select select-bordered w-full max-w-xs">
-              <option disabled selected>
+            <select
+              value={brand}
+              onChange={handleBrandChange}
+              className="select select-bordered w-full max-w-xs"
+            >
+              <option value="" disabled selected>
                 Select By Brand
               </option>
-              <option>NatureBond</option>
-              <option>ProBlend</option>
-              <option>UrbanStyle</option>
-              <option>YogaMaster</option>
-              <option>EcoLux</option>
-              <option>UrbanRunner</option>
-              <option>YogaMaster</option>
-              <option>GreenSpace</option>
-              <option>TravelMate</option>
+              <option value="NatureBond">NatureBond</option>
+              <option value="ProBlend">ProBlend</option>
+              <option value="UrbanStyle">UrbanStyle</option>
+              <option value="YogaMaster">YogaMaster</option>
+              <option value="EcoLux">EcoLux</option>
+              <option value="UrbanRunner">UrbanRunner</option>
+              <option value="GreenSpace">GreenSpace</option>
+              <option value="TravelMate">TravelMate</option>
             </select>
           </div>
 
@@ -135,6 +225,7 @@ const Home = () => {
           <button className="join-item btn btn-square">
             <TbPlayerTrackPrevFilled />
           </button>
+
           <input
             className="join-item btn btn-square"
             type="radio"
