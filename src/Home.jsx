@@ -20,79 +20,104 @@ const Home = () => {
 
   return (
     <div className="my-10 max-w-[95%] mx-auto">
-      {/* search box */}
-      <div className="max-w-[25%] mx-auto my-4">
-        <label className="input input-bordered flex items-center gap-2">
-          <input type="text" className="grow" placeholder="Search" />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-4 w-4 opacity-70"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </label>
-      </div>
-
-      {/* categorization */}
-      <div>
-        {/* select by brand */}
-        <div>
-          <select className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              Select By Brand
-            </option>
-            <option>NatureBond</option>
-            <option>ProBlend</option>
-            <option>UrbanStyle</option>
-            <option>YogaMaster</option>
-            <option>EcoLux</option>
-            <option>UrbanRunner</option>
-            <option>YogaMaster</option>
-            <option>GreenSpace</option>
-            <option>TravelMate</option>
-          </select>
+      <div className="border-2 rounded-xl p-12 mb-6">
+        {/* search box */}
+        <div className="max-w-[25%] mx-auto mb-6">
+          <label className="input input-bordered flex items-center gap-2">
+            <input type="text" className="grow" placeholder="Search" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
         </div>
 
-        {/* select by category */}
-        <div>
-          <select className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              Select By Category
-            </option>
-            <option>Fitness</option>
-            <option>Kitchen Appliances</option>
-            <option>Home Decor</option>
-            <option>Electronics</option>
-            <option>Skincare</option>
-            <option>Accessories</option>
-            <option>Clothing</option>
-            <option>Footwear</option>
-          </select>
-        </div>
+        {/* categorization */}
+        <div className="flex items-center justify-between">
+          {/* select by brand */}
+          <div>
+            <select className="select select-bordered w-full max-w-xs">
+              <option disabled selected>
+                Select By Brand
+              </option>
+              <option>NatureBond</option>
+              <option>ProBlend</option>
+              <option>UrbanStyle</option>
+              <option>YogaMaster</option>
+              <option>EcoLux</option>
+              <option>UrbanRunner</option>
+              <option>YogaMaster</option>
+              <option>GreenSpace</option>
+              <option>TravelMate</option>
+            </select>
+          </div>
 
-        {/* select by price range */}
-        <div>
-          <div className="price-range">
-            <input
-              className="input input-bordered w-full max-w-xs"
-              type="number"
-              placeholder="Min Price"
-              // value={minPrice}
-              // onChange={(e) => handlePriceRangeChange(e, "min")}
-            />
-            <input
-              className="input input-bordered w-full max-w-xs"
-              type="number"
-              placeholder="Max Price"
-              // value={maxPrice}
-              // onChange={(e) => handlePriceRangeChange(e, "max")}
-            />
+          {/* select by category */}
+          <div>
+            <select className="select select-bordered w-full max-w-xs">
+              <option disabled selected>
+                Select By Category
+              </option>
+              <option>Fitness</option>
+              <option>Kitchen Appliances</option>
+              <option>Home Decor</option>
+              <option>Electronics</option>
+              <option>Skincare</option>
+              <option>Accessories</option>
+              <option>Clothing</option>
+              <option>Footwear</option>
+            </select>
+          </div>
+
+          {/* select by price range */}
+          <div className="">
+            <div className="price-range flex items-center gap-10">
+              <input
+                className="input input-bordered w-full max-w-xs"
+                type="number"
+                placeholder="Min Price"
+                // value={minPrice}
+                // onChange={(e) => handlePriceRangeChange(e, "min")}
+              />
+              <input
+                className="input input-bordered w-full max-w-xs"
+                type="number"
+                placeholder="Max Price"
+                // value={maxPrice}
+                // onChange={(e) => handlePriceRangeChange(e, "max")}
+              />
+            </div>
+          </div>
+
+          {/* sorting */}
+
+          <div className="sort-options flex gap-10">
+            <button
+              className="btn btn-outline btn-primary"
+              onClick={() => handleSortChange("price", "asc")}
+            >
+              Price: Low to High
+            </button>
+            <button
+              className="btn btn-outline btn-primary"
+              onClick={() => handleSortChange("price", "desc")}
+            >
+              Price: High to Low
+            </button>
+            <button
+              className="btn btn-outline btn-primary"
+              onClick={() => handleSortChange("product_creation_date", "desc")}
+            >
+              Date: Newest First
+            </button>
           </div>
         </div>
       </div>
