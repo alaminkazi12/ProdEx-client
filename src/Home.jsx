@@ -37,19 +37,22 @@ const Home = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/products", {
-        params: {
-          page,
-          limit,
-          search: searchQuery,
-          category,
-          brand,
-          minPrice,
-          maxPrice,
-          sortField,
-          sortOrder,
-        },
-      });
+      const response = await axios.get(
+        "https://prod-ex-server.vercel.app/products",
+        {
+          params: {
+            page,
+            limit,
+            search: searchQuery,
+            category,
+            brand,
+            minPrice,
+            maxPrice,
+            sortField,
+            sortOrder,
+          },
+        }
+      );
       setProducts(response.data.products);
       setTotalPages(response.data.totalPages);
     } catch (error) {
