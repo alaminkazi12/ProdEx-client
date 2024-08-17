@@ -1,12 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import {
   TbPlayerTrackPrevFilled,
   TbPlayerTrackNextFilled,
 } from "react-icons/tb";
+import { AuthContext } from "./context/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { user, logOut, loading } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(8);
@@ -88,8 +91,63 @@ const Home = () => {
     setPage(newPage);
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-20">
+        <span className="loading loading-spinner text-error loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div className="my-10 max-w-[95%] mx-auto">
+    <div className=" max-w-[95%] mx-auto">
+      {/* navbar */}
+
+      <div className="navbar bg-base-100">
+        <div className="flex-1">
+          <a className="btn btn-ghost text-2xl font-bold">ProdEx</a>
+        </div>
+        {user ? (
+          <div className="flex-none gap-2">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt={user?.displayName || "Image Not Found"}
+                    src={
+                      user?.photoURL || "https://i.ibb.co/bX4Qscm/images.png"
+                    }
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                {/* <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li> */}
+                <li>
+                  <a onClick={logOut}>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+      </div>
+
       <div className="border-2 rounded-xl p-6 md:p-12 mb-6">
         {/* search box */}
         <div className="md:max-w-[50%] lg:max-w-[25%] mx-auto mb-6">
