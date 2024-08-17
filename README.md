@@ -20,24 +20,24 @@ Before you can run this project locally, ensure you have the following installed
    cd ProdEx-client
    ```
 
-If you're using npm:
+2. **If you're using npm:**
 
 ````bash
 npm install
 
-Running the Project
+3. **Running the Project**
 To start the development server, run:
 
 ```bash
 npm start
 
-Project Structure
+###Project Structure
 src/components/ - Contains reusable React components like ProductCard.
 src/pages/ - Contains page components like Home.
 src/App.js - Main application component where routing and layout is managed.
 src/index.js - Entry point of the React application.
 
-Features
+###Features
 Product Listing: Displays products with pagination.
 Search and Filtering: Users can search products and filter them by brand, category, and price range.
 Sorting: Products can be sorted by price or creation date
