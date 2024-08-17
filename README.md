@@ -9,7 +9,7 @@ This is the frontend repository for the **ProdEx** project. ProdEx is an e-comme
 Before you can run this project locally, ensure you have the following installed on your machine:
 
 - [Node.js](https://nodejs.org/) (v14 or above)
-- [npm](https://www.npmjs.com/) (v6 or above) or [Yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/) (v6 or above)
 
 ### Installation
 
