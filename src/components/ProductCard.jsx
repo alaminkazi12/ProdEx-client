@@ -1,4 +1,5 @@
 import React from "react";
+import { FaPlus } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
   return (
@@ -14,10 +15,22 @@ const ProductCard = ({ product }) => {
         <div className="card-body flex-1">
           {" "}
           {/* Flex-1 to make content take up remaining space */}
-          <h2 className="card-title">{product.product_name}</h2>
+          <h2 className="card-title">
+            {product.product_name}
+            <div className="badge badge-warning">{product.ratings}</div>
+          </h2>
           <p>{product.description}</p>
+          <div className="flex items-center">
+            <p className="text-xl font-bold mt-2">${product.price}</p>
+            <div>
+              <div className="badge badge-outline">{product.brand_name}</div>
+              <div className="badge badge-outline"> {product.category}</div>
+            </div>
+          </div>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">View Details</button>
+            <button className="btn btn-primary text-xs">
+              <FaPlus />
+            </button>
           </div>
         </div>
       </div>

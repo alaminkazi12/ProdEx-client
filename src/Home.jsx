@@ -100,7 +100,7 @@ const Home = () => {
   }
 
   return (
-    <div className=" max-w-[95%] mx-auto">
+    <div className="mb-20 max-w-[95%] mx-auto">
       {/* navbar */}
 
       <div className="navbar bg-base-100">
